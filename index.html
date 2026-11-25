@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Home Services · Platform demo</title>
+<meta name="description" content="A white-label home and personal services platform: customer app, professional app and admin console, with an instant-help add-on.">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="hs.css">
+<style>
+  body{background:radial-gradient(70% 60% at 20% 0%,#dff0da,transparent 60%),linear-gradient(170deg,#f4f9f2,#dcecd8);color:var(--dk);min-height:100vh}
+  .wrap{max-width:1120px;margin:0 auto;padding:56px 20px 64px}
+  .head{display:flex;align-items:center;gap:12px;font-weight:600}
+  .head .mark{width:36px;height:36px;filter:none}
+  .hero{display:grid;grid-template-columns:1.2fr .8fr;gap:40px;align-items:end;margin:56px 0 40px}
+  .hero .meet{font-size:clamp(36px,5vw,64px);font-weight:300;color:var(--sage3);letter-spacing:-.04em;line-height:1}
+  .hero h1{font-size:clamp(64px,10vw,132px);font-weight:600;letter-spacing:-.06em;line-height:.9;color:var(--g8)}
+  .hero h1 i{font-style:normal;color:var(--g5)}
+  .hero p{color:var(--dk2);font-size:16px;line-height:1.6;max-width:42ch}
+  .chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:18px}
+  .chips span{font-size:12px;font-weight:500;padding:8px 14px;border-radius:999px;border:1px solid var(--sage2);background:rgba(255,255,255,.55);color:var(--dk2)}
+  .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+  a.app{position:relative;display:flex;flex-direction:column;gap:10px;min-height:360px;padding:26px;border-radius:28px;color:var(--tx);text-decoration:none;overflow:hidden;transition:transform .4s var(--ease)}
+  a.app:hover{transform:translateY(-6px)}
+  a.app .k{font-size:12px;color:var(--tx2);font-weight:500;position:relative}
+  a.app h2{font-size:30px;font-weight:300;letter-spacing:-.03em;position:relative}
+  a.app h2 b{font-weight:600}
+  a.app p{color:var(--tx2);font-size:14px;line-height:1.55;flex:1;position:relative}
+  a.app .go{display:inline-flex;align-items:center;gap:8px;font-weight:600;font-size:14px;color:var(--brand);position:relative}
+  a.app .go svg{width:16px;height:16px;stroke:currentColor;fill:none;stroke-width:2;transition:transform .3s var(--ease)}
+  a.app:hover .go svg{transform:translateX(4px)}
+  a.app .num{font-size:64px;line-height:1;position:relative}
+  .note{margin-top:32px;font-size:13px;color:var(--dk2);display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;border-top:1px solid var(--sage2);padding-top:18px}
+  .note a{color:var(--g6);font-weight:600}
+  .grid>a{animation:rise .7s var(--ease) both}.grid>a:nth-child(2){animation-delay:80ms}.grid>a:nth-child(3){animation-delay:160ms}
+  @media (max-width:900px){.hero{grid-template-columns:1fr;margin:36px 0 28px}.grid{grid-template-columns:1fr}a.app{min-height:0}}
+</style>
+</head>
+<body data-title-suffix="Platform demo">
+<div class="wrap">
+  <div class="head"><span class="mark" id="mk"></span><span data-brand>Home Services</span></div>
+  <div class="hero">
+    <div><div class="meet">Meet</div><h1><span data-brand>Home Services</span><i>.</i></h1></div>
+    <div><p>Salon, cleaning and repairs booked at fixed prices, and help at home in 15 minutes. Three apps your customers, professionals and team use every day, launched under your brand.</p>
+      <div class="chips"><span>Booked services</span><span>Instant help add-on</span><span>Gateway payment split</span><span>Quality &amp; rework</span></div></div>
+  </div>
+  <div class="grid">
+    <a class="app world" href="customer-app.html"><span class="k">Mobile · Customers</span><span class="num">12<small style="font-size:16px;color:var(--tx2)"> min</small></span><h2>Customer <b>app</b></h2><p>Browse, book a slot, track the professional live, share a start code, pay, rate and claim rework.</p><span class="go">Open app <svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></a>
+    <a class="app world" href="pro-app.html"><span class="k">Mobile · Professionals</span><span class="num">₹2,340</span><h2>Pro <b>app</b></h2><p>Job alerts with a countdown, start-code check, checklists and photos, earnings, cash ledger, training and shifts.</p><span class="go">Open app <svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></a>
+    <a class="app world" href="admin-web.html"><span class="k">Web · Your team</span><span class="num">312</span><h2>Admin <b>console</b></h2><p>Live operations map, bookings, onboarding pipeline, quality and complaints, catalogue, payouts and instant help.</p><span class="go">Open console <svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></a>
+  </div>
+  <p class="note"><span>Sample data only. Prices and figures are illustrative.</span><span>Designed and built by <a href="https://www.halostudio.in">HALO Studio</a></span></p>
+</div>
+<script>document.getElementById('mk').innerHTML=`<svg viewBox="0 0 40 40"><path d="M20 2.5l15.2 8.75v17.5L20 37.5 4.8 28.75v-17.5z" fill="var(--g8)"/><path d="M12.5 19.5L20 13l7.5 6.5V27a1 1 0 01-1 1h-3.8v-5.2h-5.4V28H13.5a1 1 0 01-1-1z" fill="var(--brand)"/></svg>`;</script>
+<script src="brand.js"></script>
+</body>
+</html>

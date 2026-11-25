@@ -1,0 +1,292 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Home Services · Admin console</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="hs.css">
+<style>
+  body{background:linear-gradient(160deg,#f3f8f1,#e2efdf);color:var(--dk);min-height:100vh}
+  .app{display:grid;grid-template-columns:248px 1fr;min-height:100vh}
+  aside{position:sticky;top:0;height:100vh;padding:20px 14px;overflow-y:auto}
+  .brand{display:flex;align-items:center;gap:10px;font-weight:600;font-size:16px;padding:4px 8px 22px;position:relative}
+  .brand .mark{width:34px;height:34px}
+  .grp{font-size:11px;font-weight:600;color:var(--tx3);margin:18px 10px 6px;letter-spacing:.06em;text-transform:uppercase;position:relative}
+  nav a{position:relative;display:flex;align-items:center;gap:10px;padding:10px 12px;border-radius:14px;color:var(--tx2);font-size:14px;cursor:pointer;margin-bottom:2px;transition:background .2s,color .2s}
+  nav a svg{width:18px;height:18px;stroke:currentColor;fill:none;stroke-width:1.7;flex:none}
+  nav a:hover{color:var(--tx);background:rgba(255,255,255,.05)}
+  nav a.on{background:var(--tx);color:var(--ink)}
+  nav a .c{margin-left:auto;font-size:11px;padding:2px 8px;border-radius:999px;background:rgba(255,255,255,.1)}
+  nav a.on .c{background:var(--ink);color:var(--tx)}
+  .me{margin-top:22px;display:flex;align-items:center;gap:10px;padding:12px;position:relative}
+  .me .av{width:34px;height:34px;border-radius:50%;background:var(--brand);color:var(--on-brand);display:grid;place-items:center;font-weight:700;font-size:12px}
+  .me small{display:block;font-size:11px;color:var(--tx2)}
+  main{padding:22px 28px 40px;min-width:0}
+  .top{display:flex;align-items:center;gap:12px;margin-bottom:20px}
+  .top h1{font-size:30px;font-weight:300;letter-spacing:-.03em;flex:1}
+  .top h1 b{font-weight:600}
+  .sel{background:rgba(255,255,255,.7);border:1px solid var(--sage2);border-radius:12px;padding:9px 12px;font-size:13px}
+  .dbtn{border-radius:999px;padding:10px 16px;font-weight:600;font-size:13px;background:var(--g8);color:var(--tx)}
+  .dbtn.lime{background:var(--brand);color:var(--on-brand)}
+  .card{background:rgba(255,255,255,.72);border:1px solid rgba(255,255,255,.9);border-radius:var(--r);padding:18px;box-shadow:0 1px 0 rgba(255,255,255,.8) inset,0 16px 36px -22px rgba(13,42,27,.35);backdrop-filter:blur(14px)}
+  .card h3{font-size:14px;font-weight:600}
+  .card .sub{font-size:12px;color:var(--dk2);margin:2px 0 14px}
+  .g4{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
+  .g2{display:grid;grid-template-columns:1.6fr 1fr;gap:14px;margin-top:14px}
+  .g2e{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:14px}
+  .kpi small{font-size:12px;color:var(--dk2)}
+  .kpi .v{font-size:38px;font-weight:300;letter-spacing:-.04em;margin:6px 0 2px;font-variant-numeric:tabular-nums}
+  .kpi .d{font-size:12px;font-weight:600;color:var(--g5)}
+  .kpi.dark{background:linear-gradient(160deg,var(--g7),var(--g9));color:var(--tx);border-color:transparent}
+  .kpi.dark small{color:var(--tx2)}.kpi.dark .d{color:var(--brand)}
+  .map{height:340px;border-radius:18px;position:relative;overflow:hidden;background:linear-gradient(160deg,#173726,#0a1f14)}
+  .map svg{position:absolute;inset:0;width:100%;height:100%}
+  .legend{display:flex;gap:14px;font-size:12px;color:var(--dk2);margin-top:10px;flex-wrap:wrap}
+  .legend i{display:inline-block;width:9px;height:9px;border-radius:50%;margin-right:6px}
+  table{width:100%;border-collapse:collapse;font-size:13px}
+  th{text-align:left;font-size:11px;font-weight:600;color:var(--dk2);text-transform:uppercase;letter-spacing:.05em;padding:8px 10px;border-bottom:1px solid var(--sage2)}
+  td{padding:11px 10px;border-bottom:1px solid var(--sage1);vertical-align:middle}
+  tr:last-child td{border-bottom:0}
+  tbody tr{transition:background .2s}tbody tr:hover td{background:rgba(255,255,255,.6)}
+  .tag{display:inline-flex;align-items:center;gap:6px;font-size:11.5px;font-weight:600;padding:4px 10px;border-radius:999px;background:var(--sage1);color:var(--g6)}
+  .tag::before{content:"";width:6px;height:6px;border-radius:50%;background:currentColor}
+  .tag.ok{background:#dff6d6;color:#2d7a2a}.tag.warn{background:#fff3d6;color:#8a6200}.tag.bad{background:#ffe4e0;color:#b2392b}.tag.info{background:#e3eee4;color:var(--g6)}
+  .mini{border-radius:10px;padding:6px 12px;font-size:12px;font-weight:600;background:var(--g8);color:var(--tx)}
+  .mini.ghost{background:rgba(255,255,255,.8);color:var(--dk);border:1px solid var(--sage2)}
+  .q{display:flex;align-items:center;gap:10px;padding:10px 0;border-bottom:1px solid var(--sage1);font-size:13px}
+  .q:last-child{border:0}
+  .q b{font-weight:600;display:block}.q small{color:var(--dk2)}
+  .q .t{flex:1}
+  .kanban{display:grid;grid-template-columns:repeat(5,1fr);gap:12px}
+  .col{background:rgba(255,255,255,.45);border-radius:18px;padding:12px;min-height:300px}
+  .col h4{font-size:12px;font-weight:600;color:var(--dk2);display:flex;justify-content:space-between;margin-bottom:10px}
+  .pc{background:#fff;border-radius:14px;padding:12px;margin-bottom:8px;font-size:13px;box-shadow:0 6px 16px -10px rgba(13,42,27,.4);cursor:pointer;transition:transform .2s var(--ease)}
+  .pc:hover{transform:translateY(-2px)}
+  .pc b{font-weight:600;display:block}.pc small{color:var(--dk2);font-size:12px}
+  .pc .mini{margin-top:8px}
+  .bar{height:7px;border-radius:7px;background:var(--sage1);overflow:hidden;margin-top:6px}.bar i{display:block;height:100%;border-radius:7px;background:linear-gradient(90deg,var(--g5),var(--brand))}
+  .inp{width:90px;border:1px solid var(--sage2);background:#fff;border-radius:10px;padding:7px 9px;font-size:13px;text-align:right}
+  .hexgrid{display:grid;grid-template-columns:repeat(6,1fr);gap:8px}
+  .mm{border-radius:14px;padding:10px;font-size:12px;color:var(--tx);min-height:78px;display:flex;flex-direction:column;justify-content:space-between}
+  .mm b{font-size:22px;font-weight:300;font-variant-numeric:tabular-nums}
+  .switch{width:42px;height:24px;border-radius:999px;background:var(--sage2);position:relative;cursor:pointer;transition:background .25s;flex:none}
+  .switch::after{content:"";position:absolute;top:3px;left:3px;width:18px;height:18px;border-radius:50%;background:#fff;transition:left .25s var(--ease)}
+  .switch.on{background:var(--g6)}.switch.on::after{left:21px}
+  .set{display:flex;justify-content:space-between;align-items:center;gap:14px;padding:12px 0;border-bottom:1px solid var(--sage1);font-size:14px}
+  .set:last-child{border:0}.set small{display:block;color:var(--dk2);font-size:12px;margin-top:2px}
+  .seg{display:inline-flex;padding:3px;border-radius:12px;background:var(--sage1)}
+  .seg button{padding:7px 12px;border-radius:9px;font-size:12px;font-weight:600;color:var(--dk2)}
+  .seg button.on{background:#fff;color:var(--dk)}
+  .toast{position:fixed;right:24px;bottom:24px;top:auto;left:auto;width:auto;max-width:360px;background:var(--g8);border-color:transparent;transform:translateY(140%)}
+  .toast.show{transform:none}
+  .page.on>*{animation:rise .5s var(--ease) both}
+  @media (max-width:1100px){.g4{grid-template-columns:repeat(2,1fr)}.g2,.g2e{grid-template-columns:1fr}.kanban{grid-template-columns:repeat(2,1fr)}.hexgrid{grid-template-columns:repeat(3,1fr)}}
+  @media (max-width:820px){.app{grid-template-columns:1fr}aside{position:static;height:auto}nav{display:flex;overflow-x:auto;gap:4px}nav a{white-space:nowrap}.grp,.me{display:none}main{padding:16px}.table-wrap{overflow-x:auto}}
+</style>
+</head>
+<body data-title-suffix="Admin console">
+<div class="app">
+  <aside class="world">
+    <div class="brand"><span class="mark" id="mk"></span><span data-brand>Home Services</span></div>
+    <nav id="nav">
+      <div class="grp">Today</div>
+      <a data-p="live" class="on"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3M5 5l2 2M17 17l2 2M5 19l2-2M17 7l2-2"/></svg>Live operations</a>
+      <a data-p="bookings"><svg viewBox="0 0 24 24"><rect x="4" y="5" width="16" height="15" rx="3"/><path d="M4 10h16M9 3v4M15 3v4"/></svg>Bookings<span class="c">312</span></a>
+      <div class="grp">Supply</div>
+      <a data-p="pros"><svg viewBox="0 0 24 24"><circle cx="9" cy="8" r="3.5"/><path d="M3 20c0-3.3 2.7-6 6-6s6 2.7 6 6M16 11l2 2 4-4"/></svg>Professionals<span class="c">18</span></a>
+      <a data-p="quality"><svg viewBox="0 0 24 24"><path d="M12 3l2.7 5.6 6.1.9-4.4 4.3 1 6.1L12 17l-5.4 2.9 1-6.1L3.2 9.5l6.1-.9z"/></svg>Quality &amp; complaints<span class="c">7</span></a>
+      <div class="grp">Business</div>
+      <a data-p="catalogue"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="8" height="8" rx="2"/><rect x="13" y="3" width="8" height="8" rx="2"/><rect x="3" y="13" width="8" height="8" rx="2"/><rect x="13" y="13" width="8" height="8" rx="2"/></svg>Catalogue &amp; pricing</a>
+      <a data-p="money"><svg viewBox="0 0 24 24"><rect x="2" y="6" width="20" height="13" rx="3"/><circle cx="12" cy="12.5" r="2.5"/></svg>Payments &amp; payouts</a>
+      <a data-p="instant"><svg viewBox="0 0 24 24"><path d="M13 2L5 14h6l-1 8 8-12h-6z"/></svg>Instant help</a>
+      <a data-p="settings"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.6 1.6 0 00.3 1.8l.1.1a2 2 0 11-2.8 2.8l-.1-.1a1.6 1.6 0 00-1.8-.3 1.6 1.6 0 00-1 1.5V21a2 2 0 11-4 0v-.1a1.6 1.6 0 00-1-1.5 1.6 1.6 0 00-1.8.3l-.1.1a2 2 0 11-2.8-2.8l.1-.1a1.6 1.6 0 00.3-1.8 1.6 1.6 0 00-1.5-1H3a2 2 0 110-4h.1a1.6 1.6 0 001.5-1 1.6 1.6 0 00-.3-1.8l-.1-.1a2 2 0 112.8-2.8l.1.1a1.6 1.6 0 001.8.3H9a1.6 1.6 0 001-1.5V3a2 2 0 114 0v.1a1.6 1.6 0 001 1.5 1.6 1.6 0 001.8-.3l.1-.1a2 2 0 112.8 2.8l-.1.1a1.6 1.6 0 00-.3 1.8V9a1.6 1.6 0 001.5 1H21a2 2 0 110 4h-.1a1.6 1.6 0 00-1.5 1z"/></svg>Setup</a>
+    </nav>
+    <div class="me glass"><div class="av">PS</div><div><b style="font-size:13px">Priya S.</b><small>Founder · all cities</small></div></div>
+  </aside>
+
+  <main>
+    <div class="top"><h1 id="title"><b>Live</b> operations</h1>
+      <select class="sel"><option data-branch>Hyderabad</option><option>Bengaluru</option><option>Pune</option></select>
+      <button class="dbtn lime" onclick="toast('New service added to the draft catalogue')">+ New service</button></div>
+
+    <!-- LIVE -->
+    <section class="page on" data-page="live">
+      <div class="g4">
+        <div class="card kpi dark"><small>Bookings today</small><div class="v">312</div><span class="d">▲ 14% vs last Tue</span></div>
+        <div class="card kpi"><small>GMV today</small><div class="v">₹4.8L</div><span class="d">▲ ₹62k</span></div>
+        <div class="card kpi"><small>On-time arrival</small><div class="v">93%</div><span class="d">Target 95%</span></div>
+        <div class="card kpi"><small>Average rating</small><div class="v">4.82</div><span class="d">Last 7 days</span></div>
+      </div>
+      <div class="g2">
+        <div class="card"><h3>Live map</h3><div class="sub">Jobs and professionals across zones</div>
+          <div class="map"><svg viewBox="0 0 600 340" preserveAspectRatio="none" id="mapSvg"></svg></div>
+          <div class="legend"><span><i style="background:var(--brand)"></i>In progress</span><span><i style="background:#ffd36b"></i>On the way</span><span><i style="background:#ff7b6b"></i>Unassigned</span><span><i style="background:#fff"></i>Idle professional</span></div>
+        </div>
+        <div class="card"><h3>Needs attention</h3><div class="sub">Unassigned and late jobs</div><div id="queue"></div></div>
+      </div>
+    </section>
+
+    <!-- BOOKINGS -->
+    <section class="page" data-page="bookings">
+      <div class="card" style="padding:6px 8px"><div class="table-wrap"><table>
+        <thead><tr><th>Booking</th><th>Customer</th><th>Service</th><th>Professional</th><th>Slot</th><th>Amount</th><th>Status</th></tr></thead>
+        <tbody id="bkBody"></tbody></table></div></div>
+    </section>
+
+    <!-- PROS -->
+    <section class="page" data-page="pros">
+      <div class="kanban" id="kanban"></div>
+    </section>
+
+    <!-- QUALITY -->
+    <section class="page" data-page="quality">
+      <div class="g2e" style="margin-top:0">
+        <div class="card"><h3>Complaints &amp; rework</h3><div class="sub">SLA: resolve within 24 hours</div><div id="complaints"></div></div>
+        <div class="card"><h3>Quality score alerts</h3><div class="sub">Proposed automatically · needs your approval</div><div id="qalerts"></div></div>
+      </div>
+    </section>
+
+    <!-- CATALOGUE -->
+    <section class="page" data-page="catalogue">
+      <div class="card" style="padding:6px 8px"><div class="table-wrap"><table>
+        <thead><tr><th>Category</th><th>Service</th><th>Duration</th><th>Price</th><th>Commission</th><th>Warranty</th><th>Live</th></tr></thead>
+        <tbody id="catBody"></tbody></table></div></div>
+    </section>
+
+    <!-- MONEY -->
+    <section class="page" data-page="money">
+      <div class="g4">
+        <div class="card kpi dark"><small>Collected this week</small><div class="v">₹28.6L</div><span class="d">via gateway split</span></div>
+        <div class="card kpi"><small>Commission earned</small><div class="v">₹5.4L</div><span class="d">18.9% take rate</span></div>
+        <div class="card kpi"><small>Due to professionals</small><div class="v">₹21.1L</div><span class="d">Auto-settled Monday</span></div>
+        <div class="card kpi"><small>Cash in hand owed</small><div class="v">₹62k</div><span class="d" style="color:#b2392b">From 41 pros</span></div>
+      </div>
+      <div class="card" style="margin-top:14px;padding:6px 8px"><div class="table-wrap"><table>
+        <thead><tr><th>Professional</th><th>Jobs</th><th>Earnings</th><th>Cash owed</th><th>Payout</th><th></th></tr></thead>
+        <tbody id="payBody"></tbody></table></div></div>
+    </section>
+
+    <!-- INSTANT -->
+    <section class="page" data-page="instant">
+      <div class="g4">
+        <div class="card kpi dark"><small>Median arrival</small><div class="v">11.4 min</div><span class="d">Promise: 15 min</span></div>
+        <div class="card kpi"><small>Helpers on shift</small><div class="v">86</div><span class="d">of 104 planned</span></div>
+        <div class="card kpi"><small>Jobs this hour</small><div class="v">142</div><span class="d">▲ evening peak</span></div>
+        <div class="card kpi"><small>Cost per shift</small><div class="v">₹540</div><span class="d">Revenue ₹712 / shift</span></div>
+      </div>
+      <div class="card" style="margin-top:14px"><h3>Micro-markets · supply right now</h3><div class="sub">Free helpers vs open requests, Madhapur cluster</div><div class="hexgrid" id="mm"></div></div>
+    </section>
+
+    <!-- SETTINGS -->
+    <section class="page" data-page="settings">
+      <div class="g2e" style="margin-top:0">
+        <div class="card"><h3>Business model</h3><div class="sub">Applies to the selected city</div>
+          <div class="set"><div>Worker model<small>Independent partners on commission, or your own staff</small></div><div class="seg" data-seg><button class="on">Partners</button><button>Own staff</button></div></div>
+          <div class="set"><div>Default commission<small>Overridable per category and tier</small></div><input class="inp" value="20%"></div>
+          <div class="set"><div>Payment split<small>Gateway settles each pro's share automatically</small></div><span class="switch on"></span></div>
+          <div class="set"><div>Pay after service<small>Allow cash, tracked in the cash ledger</small></div><span class="switch on"></span></div>
+          <div class="set"><div>Instant help add-on<small>15-minute help in micro-markets</small></div><span class="switch on"></span></div>
+        </div>
+        <div class="card"><h3>Rules</h3><div class="sub">Quality, warranty and cancellations</div>
+          <div class="set"><div>Auto-warn below score<small>Assign refresher training automatically</small></div><input class="inp" value="75"></div>
+          <div class="set"><div>Suggest suspension below<small>Admin approves every suspension</small></div><input class="inp" value="60"></div>
+          <div class="set"><div>Rework cost when pro at fault<small>Pro redoes the job unpaid</small></div><span class="switch on"></span></div>
+          <div class="set"><div>Free cancellation window<small>Before the slot starts</small></div><input class="inp" value="3 hrs"></div>
+          <div class="set"><div>Late cancellation fee<small>Paid to the professional</small></div><input class="inp" value="₹99"></div>
+        </div>
+      </div>
+    </section>
+  </main>
+</div>
+<div class="toast" id="toast"><div class="mk mark" id="toastMark"></div><div><b data-brand>Home Services</b><span id="toastText"></span></div></div>
+
+<script>
+const MARK = `<svg viewBox="0 0 40 40"><path d="M20 2.5l15.2 8.75v17.5L20 37.5 4.8 28.75v-17.5z" fill="var(--brand)" opacity=".18" stroke="var(--brand)" stroke-width="1.4"/><path d="M12.5 19.5L20 13l7.5 6.5V27a1 1 0 01-1 1h-3.8v-5.2h-5.4V28H13.5a1 1 0 01-1-1z" fill="var(--brand)"/></svg>`;
+document.getElementById('mk').innerHTML = MARK; document.getElementById('toastMark').innerHTML = MARK;
+function toast(t){ const el=document.getElementById('toast'); document.getElementById('toastText').textContent=' '+t; el.classList.add('show'); clearTimeout(window._t); window._t=setTimeout(()=>el.classList.remove('show'),2600); }
+const TITLES = {live:'<b>Live</b> operations',bookings:'<b>Bookings</b>',pros:'<b>Professionals</b> pipeline',quality:'<b>Quality</b> &amp; complaints',catalogue:'<b>Catalogue</b> &amp; pricing',money:'<b>Payments</b> &amp; payouts',instant:'<b>Instant help</b> add-on',settings:'<b>Setup</b>'};
+
+/* live map */
+(function(){
+  let s = '<g stroke="rgba(255,255,255,.06)">' + Array.from({length:12},(_,i)=>`<path d="M${i*55} 0V340M0 ${i*31}H600"/>`).join('') + '</g>';
+  const zones = [[60,40,180,130,'Madhapur'],[270,30,190,120,'Kondapur'],[90,190,200,120,'Gachibowli'],[330,180,220,130,'HITEC City']];
+  zones.forEach(([x,y,w,h,n])=>{ s += `<rect x="${x}" y="${y}" width="${w}" height="${h}" rx="22" fill="rgba(157,255,110,.05)" stroke="rgba(157,255,110,.3)" stroke-dasharray="5 6"/><text x="${x+14}" y="${y+24}" fill="rgba(234,245,236,.55)" font-size="12" font-family="Inter Tight">${n}</text>`; });
+  let seed = 7; const r = () => (seed = (seed*9301+49297)%233280)/233280;
+  const cols = ['var(--brand)','var(--brand)','var(--brand)','#ffd36b','#ffd36b','#fff','#fff','#ff7b6b'];
+  for (let i=0;i<46;i++){ const c = cols[Math.floor(r()*cols.length)], x = 70+r()*470, y = 50+r()*250;
+    s += `<circle cx="${x}" cy="${y}" r="${c==='#fff'?3.5:5}" fill="${c}" ${c!=='#fff'?`style="filter:drop-shadow(0 0 6px ${c})"`:''}>${c==='#ff7b6b'?'<animate attributeName="r" values="5;8;5" dur="1.6s" repeatCount="indefinite"/>':''}</circle>`; }
+  document.getElementById('mapSvg').innerHTML = s;
+})();
+let queue = [
+  {n:'Kitchen deep cleaning',w:'Kondapur · 12:00 · no pro accepted',k:'bad'},
+  {n:'AC gas refill',w:'HITEC City · pro running 18 min late',k:'warn'},
+  {n:'Waxing: full arms + legs',w:'Madhapur · customer asked for a woman pro',k:'bad'},
+  {n:'Fan installation',w:'Gachibowli · rescheduled twice',k:'warn'}
+];
+function renderQueue(){
+  document.getElementById('queue').innerHTML = queue.length ? queue.map((q,i)=>`<div class="q"><span class="tag ${q.k}"></span><div class="t"><b>${q.n}</b><small>${q.w}</small></div><button class="mini" onclick="assign(${i})">${q.k==='bad'?'Assign':'Call pro'}</button></div>`).join('') : '<p style="color:var(--dk2);font-size:13px">All clear.</p>';
+}
+function assign(i){ toast(queue[i].k==='bad'?'Assigned to the nearest best-rated pro':'Calling the professional'); queue.splice(i,1); renderQueue(); }
+
+/* bookings */
+const BK = [
+  ['HS-24817','Ananya R.','AC foam-jet service','Ravi K.','Today 11:00','₹708','On the way','warn'],
+  ['HS-24816','Karthik M.','Bathroom deep cleaning','Meena S.','Today 10:00','₹646','In progress','ok'],
+  ['HS-24811','Divya P.','Mani-pedi deluxe','Lakshmi V.','Today 09:00','₹1,061','Completed','info'],
+  ['HS-24809','Rahul S.','Kitchen deep cleaning','—','Today 12:00','₹1,769','Unassigned','bad'],
+  ['HS-24801','Sneha G.','Haircut + beard','Imran A.','Today 08:30','₹471','Completed','info'],
+  ['HS-24795','Vikram T.','Cockroach control','Suresh B.','Yesterday','₹1,297','Rework open','warn']
+];
+document.getElementById('bkBody').innerHTML = BK.map(b=>`<tr onclick="toast('Opened ${b[0]} timeline')"><td><b>${b[0]}</b></td><td>${b[1]}</td><td>${b[2]}</td><td>${b[3]}</td><td>${b[4]}</td><td>${b[5]}</td><td><span class="tag ${b[7]}">${b[6]}</span></td></tr>`).join('');
+
+/* pros kanban */
+const STAGES = ['Applied','KYC','Skill test','Training','Active'];
+let PROS = [
+  ['Arjun N.','Electrician',0],['Fatima B.','Salon',0],['Kiran R.','Cleaning',0],
+  ['Deepak J.','AC & appliance',1],['Sravani K.','Salon',1],
+  ['Manoj P.','Plumber',2],['Rekha D.','Cleaning',2],
+  ['Ganesh L.','Painting',3],['Anil S.','AC & appliance',3],
+  ['Ravi K.','AC & appliance',4],['Meena S.','Cleaning',4],['Lakshmi V.','Salon',4]
+];
+const NEXT = ['Verify KYC','Pass test','Assign training','Activate',''];
+function renderPros(){
+  document.getElementById('kanban').innerHTML = STAGES.map((s,si)=>{ const list = PROS.map((p,i)=>[p,i]).filter(([p])=>p[2]===si);
+    return `<div class="col"><h4>${s}<span>${list.length}</span></h4>${list.map(([p,i])=>`<div class="pc"><b>${p[0]}</b><small>${p[1]}</small>${si<4?`<div><button class="mini" onclick="advance(${i})">${NEXT[si]}</button></div>`:`<div class="bar"><i style="width:${80+i%3*7}%"></i></div>`}</div>`).join('')}</div>`; }).join('');
+}
+function advance(i){ PROS[i][2]++; renderPros(); toast(PROS[i][0]+' moved to '+STAGES[PROS[i][2]]); }
+
+/* quality */
+let CMP = [['Bathroom deep cleaning','Karthik M. · "corners not cleaned"','Free rework booked'],['AC gas refill','Vikram T. · cooling weak after 2 days','Inspection scheduled'],['Mani-pedi deluxe','Divya P. · arrived 25 min late','Credit ₹100?']];
+function renderQuality(){
+  document.getElementById('complaints').innerHTML = CMP.map((c,i)=>`<div class="q"><div class="t"><b>${c[0]}</b><small>${c[1]}</small></div><button class="mini ghost" onclick="CMP.splice(${i},1);renderQuality();toast('Complaint resolved')">${c[2]}</button></div>`).join('') || '<p style="font-size:13px;color:var(--dk2)">No open complaints.</p>';
+  document.getElementById('qalerts').innerHTML = [['Suresh B.','Score 58 · 3 rework jobs in 14 days','Suspend'],['Imran A.','Score 72 · late arrivals','Training sent'],['Meena S.','Score 96 · 0 rework','Promote to Platinum']].map(a=>`<div class="q"><div class="t"><b>${a[0]}</b><small>${a[1]}</small></div><button class="mini ${a[2]==='Training sent'?'ghost':''}" onclick="toast('${a[0]}: ${a[2]} approved')">${a[2]}</button></div>`).join('');
+}
+
+/* catalogue */
+const CAT = [['Cleaning','Bathroom deep cleaning','90 min',549,'20%','7 days',1],['Cleaning','Full home deep cleaning (2BHK)','6 hrs',4299,'18%','7 days',1],['AC & appliance','AC foam-jet service','60 min',599,'20%','30 days',1],['AC & appliance','Gas refill + leak fix','90 min',2499,'15%','30 days',1],['Salon for women','Mani-pedi deluxe','75 min',899,'25%','3 days',1],['Painting','Room painting inspection','45 min',0,'12%','90 days',0]];
+document.getElementById('catBody').innerHTML = CAT.map(c=>`<tr><td>${c[0]}</td><td><b>${c[1]}</b></td><td>${c[2]}</td><td><input class="inp" value="₹${c[3].toLocaleString('en-IN')}" onchange="toast('Price saved for ${c[1]}')"></td><td>${c[4]}</td><td>${c[5]}</td><td><span class="switch ${c[6]?'on':''}" onclick="this.classList.toggle('on')"></span></td></tr>`).join('');
+
+/* money */
+document.getElementById('payBody').innerHTML = [['Ravi K.',27,'₹14,860','₹1,380','₹13,480'],['Meena S.',31,'₹12,410','₹0','₹12,410'],['Lakshmi V.',18,'₹16,920','₹640','₹16,280'],['Imran A.',22,'₹8,730','₹2,100','₹6,630']].map(p=>`<tr><td><b>${p[0]}</b></td><td>${p[1]}</td><td>${p[2]}</td><td>${p[3]}</td><td><b>${p[4]}</b></td><td><button class="mini" onclick="this.textContent='Settled';toast('Payout settled to ${p[0]}')">Settle</button></td></tr>`).join('');
+
+/* instant micro-markets */
+document.getElementById('mm').innerHTML = [['N-1',6,2],['N-2',3,5],['N-3',8,1],['C-1',2,6],['C-2',5,3],['C-3',7,2],['S-1',4,4],['S-2',1,5],['S-3',6,1],['E-1',5,2],['E-2',3,3],['E-3',9,2]].map(([n,f,o])=>{const t=f/(f+o);const bg=t>.6?'linear-gradient(160deg,var(--g6),var(--g8))':t>.4?'linear-gradient(160deg,#5d6a2a,#2c3a18)':'linear-gradient(160deg,#7a3a2c,#3a1a14)';return `<div class="mm" style="background:${bg}"><span>${n}</span><div><b>${f}</b> free · ${o} open</div></div>`}).join('');
+
+document.querySelectorAll('[data-seg]').forEach(s=>s.querySelectorAll('button').forEach(b=>b.onclick=()=>{s.querySelectorAll('button').forEach(x=>x.classList.toggle('on',x===b));toast('Worker model: '+b.textContent)}));
+document.querySelectorAll('.set .switch').forEach(sw=>sw.onclick=()=>sw.classList.toggle('on'));
+
+function show(p){
+  document.querySelectorAll('.page').forEach(s=>s.classList.toggle('on',s.dataset.page===p));
+  document.querySelectorAll('#nav a').forEach(a=>a.classList.toggle('on',a.dataset.p===p));
+  document.getElementById('title').innerHTML = TITLES[p];
+  if (p==='pros') renderPros(); if (p==='quality') renderQuality(); if (p==='live') renderQueue();
+  window.scrollTo(0,0);
+}
+document.querySelectorAll('#nav a').forEach(a=>a.onclick=()=>show(a.dataset.p));
+renderQueue();
+</script>
+<script src="brand.js"></script>
+</body>
+</html>

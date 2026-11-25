@@ -1,0 +1,251 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Home Services · Professional app</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="hs.css">
+<style>
+  .top{display:flex;justify-content:space-between;align-items:center;margin:6px 0 18px}
+  .top small{color:var(--tx2);font-size:13px}
+  .top h2{font-size:24px;font-weight:500;letter-spacing:-.02em}
+  .online{display:flex;align-items:center;gap:10px;padding:6px 6px 6px 14px;border-radius:999px;background:var(--glass2);border:1px solid var(--line);font-size:13px;font-weight:600}
+  .sw{width:46px;height:28px;border-radius:999px;background:rgba(255,255,255,.15);position:relative;transition:background .3s}
+  .sw::after{content:"";position:absolute;top:3px;left:3px;width:22px;height:22px;border-radius:50%;background:#fff;transition:left .3s var(--ease)}
+  .sw.on{background:var(--brand);box-shadow:0 0 16px -2px var(--brand)}.sw.on::after{left:21px;background:var(--ink)}
+  .earn{padding:20px;text-align:center;overflow:hidden}
+  .earn::after{content:"";position:absolute;left:50%;top:-90px;translate:-50% 0;width:260px;height:200px;border-radius:50%;background:radial-gradient(circle,color-mix(in srgb,var(--brand) 30%,transparent),transparent 70%)}
+  .earn small{color:var(--tx2);font-size:13px;position:relative}
+  .earn .big{font-size:64px;line-height:1;margin:8px 0 4px;position:relative}
+  .grid2{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:10px}
+  .stat{padding:14px}
+  .stat small{color:var(--tx2);font-size:12px}
+  .stat .v{font-size:30px;margin-top:6px;line-height:1}
+  .stat .v small{font-size:13px;margin-left:3px}
+  .sec{display:flex;justify-content:space-between;align-items:baseline;margin:22px 2px 12px}
+  .sec h3{font-size:16px;font-weight:500}
+  .sec a{font-size:13px;color:var(--brand);cursor:pointer}
+  .job{padding:16px}
+  .job .row{display:flex;justify-content:space-between;align-items:flex-start;gap:10px}
+  .job b{font-size:16px;font-weight:500}
+  .job small{display:block;color:var(--tx2);font-size:12px;margin-top:4px}
+  .job .meta{display:flex;gap:8px;margin:12px 0;flex-wrap:wrap}
+  .ring{width:140px;height:140px;margin:6px auto 10px;position:relative}
+  .ring svg{width:100%;height:100%;transform:rotate(-90deg)}
+  .ring .c{position:absolute;inset:0;display:grid;place-content:center;text-align:center}
+  .ring .c .num{font-size:44px;line-height:1}
+  .ring .c small{color:var(--tx2);font-size:12px}
+  .bars{display:flex;align-items:flex-end;gap:10px;height:150px;padding:10px 4px 0}
+  .bars div{flex:1;display:flex;flex-direction:column;align-items:center;gap:6px;height:100%;justify-content:flex-end;font-size:11px;color:var(--tx2)}
+  .bars i{display:block;width:100%;border-radius:10px;background:linear-gradient(180deg,var(--brand),color-mix(in srgb,var(--brand) 25%,transparent));transform-origin:bottom;animation:grow .9s var(--ease) both}
+  .bars div.dim i{background:rgba(255,255,255,.12)}
+  @keyframes grow{from{transform:scaleY(0)}}
+  .line{display:flex;justify-content:space-between;align-items:center;padding:14px 16px;margin-bottom:8px;font-size:14px}
+  .line small{display:block;color:var(--tx2);font-size:12px;margin-top:2px}
+  .line .num{font-size:20px}
+  .neg{color:var(--bad)}
+  .keypad{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:14px}
+  .keypad button{padding:14px 0;border-radius:16px;background:var(--glass);border:1px solid var(--line);font-size:22px;font-weight:300}
+  .code{display:flex;gap:10px;justify-content:center;margin:8px 0}
+  .code span{width:56px;height:66px;border-radius:16px;background:var(--glass2);border:1px solid var(--line);display:grid;place-items:center;font-size:34px;font-weight:300}
+  .code span.f{border-color:var(--brand);box-shadow:0 0 16px -4px var(--brand)}
+  .check{display:flex;align-items:center;gap:12px;padding:13px 14px;margin-bottom:8px;font-size:14px;cursor:pointer}
+  .check i{width:22px;height:22px;border-radius:7px;border:1.5px solid var(--tx3);flex:none;display:grid;place-items:center}
+  .check.on i{background:var(--brand);border-color:var(--brand)}
+  .check.on i::after{content:"";width:10px;height:6px;border:2px solid var(--ink);border-top:0;border-right:0;transform:rotate(-45deg) translate(1px,-1px)}
+  .photos{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:12px 0}
+  .photos div{height:110px;border-radius:16px;background:var(--glass);border:1px dashed var(--line);display:grid;place-items:center;font-size:12px;color:var(--tx2);background-size:cover;background-position:center}
+  .mod{display:flex;gap:12px;align-items:center;padding:14px;margin-bottom:8px}
+  .mod .ic{width:48px;height:48px;border-radius:14px;background-size:cover;background-position:center;flex:none}
+  .mod .t{flex:1}.mod b{font-size:14px;font-weight:500;display:block}.mod small{font-size:12px;color:var(--tx2)}
+  .prog{height:6px;border-radius:6px;background:rgba(255,255,255,.1);margin-top:8px;overflow:hidden}.prog i{display:block;height:100%;background:var(--brand);border-radius:6px}
+  .seg{display:flex;padding:4px;border-radius:16px;background:var(--glass);border:1px solid var(--line);margin-bottom:14px}
+  .seg button{flex:1;padding:10px 0;border-radius:12px;font-size:13px;color:var(--tx2);font-weight:500}
+  .seg button.on{background:var(--tx);color:var(--ink)}
+  .shift{display:flex;justify-content:space-between;align-items:center;padding:14px 16px;margin-bottom:8px}
+  .shift b{font-weight:500;font-size:15px}.shift small{display:block;color:var(--tx2);font-size:12px;margin-top:2px}
+  .back{display:flex;align-items:center;gap:10px;margin:6px 0 16px;font-size:20px;font-weight:500}
+  .back button{width:38px;height:38px;border-radius:12px;background:var(--glass2);display:grid;place-items:center}
+  .back button svg{width:18px;height:18px;stroke:currentColor;fill:none;stroke-width:2}
+</style>
+</head>
+<body data-title-suffix="Professional app">
+<div class="stage">
+  <div class="side">
+    <div class="k">Mobile · Professionals</div>
+    <h1><span data-brand>Home Services</span> <b>pro app</b></h1>
+    <p>For the professionals who do the work: go online, accept jobs, verify the start code, follow the checklist, upload photos, and see earnings, payouts and cash in hand. Training and kits unlock new services. All data is sample.</p>
+    <div class="tags"><span>Job alerts</span><span>Start-code check</span><span>Earnings &amp; cash ledger</span><span>Shifts (instant add-on)</span></div>
+    <a href="index.html">← All apps</a>
+  </div>
+
+  <div class="phone"><div class="screen world">
+    <div class="island"></div>
+    <div class="status"><span>9:41</span><span>5G · 72%</span></div>
+    <div class="toast" id="toast"><div class="mk mark" id="toastMark"></div><div><b data-brand>Home Services</b><span id="toastText"></span></div></div>
+
+    <div class="scroll" id="scroll">
+      <!-- TODAY -->
+      <section class="page on" data-page="today">
+        <div class="top"><div><small>Tuesday, 25 Nov</small><h2>Ravi Kumar</h2></div>
+          <button class="online" onclick="toggleOnline()"><span id="onTxt">Online</span><span class="sw on" id="sw"></span></button></div>
+        <div class="earn glass"><small>Earned today</small><div class="big num" id="earnToday">₹2,340</div><span class="pill lime">+ ₹150 peak bonus</span></div>
+        <div class="grid2">
+          <div class="stat glass"><small>Jobs done</small><div class="v num">4<small>/ 6</small></div></div>
+          <div class="stat glass"><small>Rating</small><div class="v num">4.9<small>★</small></div></div>
+          <div class="stat glass" style="grid-column:1/-1;display:flex;align-items:center;gap:16px">
+            <div class="gauge" style="width:120px;height:72px"><svg viewBox="0 0 160 96"><path d="M14 88 A66 66 0 0 1 146 88" fill="none" stroke="rgba(255,255,255,.1)" stroke-width="10" stroke-linecap="round"/><path d="M14 88 A66 66 0 0 1 146 88" fill="none" stroke="var(--brand)" stroke-width="10" stroke-linecap="round" stroke-dasharray="207" stroke-dashoffset="19" style="filter:drop-shadow(0 0 8px var(--brand))"/></svg><div class="val"><span class="num" style="font-size:28px">91</span></div></div>
+            <div><b style="font-weight:500">Quality score · Gold</b><small style="display:block;color:var(--tx2);font-size:12px;margin-top:4px">No rework in 30 days. 9 points to Platinum and priority jobs.</small></div>
+          </div>
+        </div>
+        <div class="sec"><h3>Next job</h3><a onclick="go('job')">Open</a></div>
+        <div class="job glass">
+          <div class="row"><div><b>AC foam-jet service</b><small>Ananya R. · Madhapur · 11:00</small></div><span class="num" style="font-size:24px">₹480</span></div>
+          <div class="meta"><span class="pill">2.4 km</span><span class="pill">60 min</span><span class="pill">Paid online</span></div>
+          <button class="btn block" onclick="go('job')">Start navigation</button>
+        </div>
+        <button class="btn ghost block" style="margin-top:12px" onclick="incoming()">Simulate a new job alert</button>
+      </section>
+
+      <!-- JOB FLOW -->
+      <section class="page" data-page="job">
+        <div class="back"><button onclick="go('today')"><svg viewBox="0 0 24 24"><path d="M15 6l-6 6 6 6"/></svg></button><span id="jobHead">Enter start code</span></div>
+        <div id="jobBody"></div>
+      </section>
+
+      <!-- EARNINGS -->
+      <section class="page" data-page="earn">
+        <div class="top"><div><small>This week</small><h2 class="num" style="font-size:44px;font-weight:300">₹14,860</h2></div></div>
+        <div class="glass" style="padding:14px 12px 10px"><div class="bars" id="bars"></div></div>
+        <div class="sec"><h3>Breakdown</h3></div>
+        <div class="line glass"><span>Job earnings<small>27 jobs</small></span><span class="num">₹13,240</span></div>
+        <div class="line glass"><span>Tips<small>From 11 customers</small></span><span class="num">₹620</span></div>
+        <div class="line glass"><span>Incentives<small>Weekly target hit</small></span><span class="num">₹1,000</span></div>
+        <div class="line glass"><span>Cash in hand<small>Collected from 3 cash jobs, owed to platform</small></span><span class="num neg">−₹1,380</span></div>
+        <div class="glass" style="padding:16px;margin-top:4px;display:flex;justify-content:space-between;align-items:center">
+          <div><small style="color:var(--tx2)">Next payout · Monday</small><div class="num" style="font-size:32px">₹13,480</div></div>
+          <button class="btn" onclick="toast('Instant payout requested to HDFC ••4421')">Pay out now</button>
+        </div>
+      </section>
+
+      <!-- GROW: training + kits -->
+      <section class="page" data-page="grow">
+        <div class="top"><div><small>Learn and earn more</small><h2>Training &amp; kits</h2></div></div>
+        <div class="seg" id="growSeg"><button class="on" data-v="train">Training</button><button data-v="kit">Kit store</button><button data-v="shift">Shifts</button></div>
+        <div id="growBody"></div>
+      </section>
+
+      <!-- PROFILE -->
+      <section class="page" data-page="me">
+        <div class="top"><div><small>Profile</small><h2>Ravi Kumar</h2></div></div>
+        <div class="line glass"><span>KYC<small>Aadhaar, PAN, bank verified</small></span><span class="pill lime">Verified</span></div>
+        <div class="line glass"><span>Police verification<small>Valid till Aug 2027</small></span><span class="pill lime">Cleared</span></div>
+        <div class="line glass"><span>Services unlocked<small>AC service, gas refill, inspection</small></span><span class="pill">3</span></div>
+        <div class="line glass"><span>Work zones<small>Madhapur, Kondapur, Gachibowli</small></span><span>›</span></div>
+        <div class="line glass" onclick="toast('Leave request sent for 28 Nov')"><span>Request leave<small>Pick days you won't work</small></span><span>›</span></div>
+      </section>
+    </div>
+
+    <nav class="tabbar" id="tabbar">
+      <button class="on" data-go="today" aria-label="Today"><svg viewBox="0 0 24 24"><path d="M4 11l8-7 8 7v8a1 1 0 01-1 1h-4v-6H9v6H5a1 1 0 01-1-1z"/></svg></button>
+      <button data-go="earn" aria-label="Earnings"><svg viewBox="0 0 24 24"><path d="M4 20V10M10 20V4M16 20v-7M22 20H2"/></svg></button>
+      <button data-go="grow" aria-label="Training"><svg viewBox="0 0 24 24"><path d="M12 3l7.8 4.5v9L12 21l-7.8-4.5v-9z"/><path d="M12 12l7.8-4.5M12 12v9M12 12L4.2 7.5"/></svg></button>
+      <button data-go="me" aria-label="Profile"><svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 3.6-7 8-7s8 3 8 7"/></svg></button>
+    </nav>
+
+    <div class="sheet" id="sheet"><div class="panel world" id="sheetBody"></div></div>
+  </div></div>
+</div>
+
+<script>
+const MARK = `<svg viewBox="0 0 40 40"><path d="M20 2.5l15.2 8.75v17.5L20 37.5 4.8 28.75v-17.5z" fill="var(--brand)" opacity=".18" stroke="var(--brand)" stroke-width="1.4"/><path d="M12.5 19.5L20 13l7.5 6.5V27a1 1 0 01-1 1h-3.8v-5.2h-5.4V28H13.5a1 1 0 01-1-1z" fill="var(--brand)"/></svg>`;
+document.getElementById('toastMark').innerHTML = MARK;
+const rupee = n => '₹' + n.toLocaleString('en-IN');
+function toast(t){ const el=document.getElementById('toast'); document.getElementById('toastText').textContent=' '+t; el.classList.add('show'); clearTimeout(window._t); window._t=setTimeout(()=>el.classList.remove('show'),2600); }
+
+let online = true;
+function toggleOnline(){ online=!online; document.getElementById('sw').classList.toggle('on',online); document.getElementById('onTxt').textContent=online?'Online':'Offline'; toast(online?'You are online. Jobs will come in.':'You are offline.'); }
+
+/* incoming job with countdown ring */
+let timer;
+function incoming(){
+  const sb = document.getElementById('sheetBody'), C = 2*Math.PI*60;
+  sb.innerHTML = `<div style="text-align:center"><span class="pill lime">New job</span>
+    <div class="ring"><svg viewBox="0 0 140 140"><circle cx="70" cy="70" r="60" fill="none" stroke="rgba(255,255,255,.1)" stroke-width="8"/><circle id="rc" cx="70" cy="70" r="60" fill="none" stroke="var(--brand)" stroke-width="8" stroke-linecap="round" stroke-dasharray="${C}" stroke-dashoffset="0" style="transition:stroke-dashoffset 1s linear;filter:drop-shadow(0 0 8px var(--brand))"/></svg><div class="c"><span class="num" id="rs">15</span><small>seconds</small></div></div>
+    <div style="font-size:20px;font-weight:500">Bathroom deep cleaning</div><div style="color:var(--tx2);font-size:13px;margin:4px 0 14px">Kondapur · 1.8 km · Tomorrow 10:00 · 90 min</div>
+    <div class="num" style="font-size:44px">₹420</div><div style="color:var(--tx2);font-size:12px;margin-bottom:18px">Your earning after commission</div>
+    <div style="display:flex;gap:10px"><button class="btn ghost" style="flex:1" onclick="decide(false)">Decline</button><button class="btn" style="flex:2" onclick="decide(true)">Accept</button></div></div>`;
+  document.getElementById('sheet').classList.add('show');
+  let s = 15; const rc = document.getElementById('rc');
+  clearInterval(timer);
+  timer = setInterval(()=>{ s--; document.getElementById('rs').textContent=s; rc.style.strokeDashoffset = C*(1-s/15); if(s<=0){ decide(false,true); } },1000);
+}
+function decide(ok, timeout){ clearInterval(timer); document.getElementById('sheet').classList.remove('show'); toast(ok?'Accepted · added to tomorrow':timeout?'Missed · job passed to the next pro':'Declined'); }
+
+/* job flow: code -> checklist -> photos -> done */
+let jstep = 0, code = '';
+function renderJob(){
+  const head = document.getElementById('jobHead'), body = document.getElementById('jobBody');
+  if (jstep===0){
+    head.textContent='Enter start code';
+    body.innerHTML = `<div class="glass" style="padding:18px;text-align:center"><div style="color:var(--tx2);font-size:13px">Ask Ananya for the 4-digit code in her app</div>
+      <div class="code">${[0,1,2,3].map(i=>`<span class="${i===code.length?'f':''}">${code[i]||''}</span>`).join('')}</div></div>
+      <div class="keypad">${[1,2,3,4,5,6,7,8,9,'',0,'⌫'].map(k=>k===''?'<span></span>':`<button onclick="key('${k}')">${k}</button>`).join('')}</div>
+      <p style="text-align:center;color:var(--tx3);font-size:12px;margin-top:12px">Demo code: 4827</p>`;
+  } else if (jstep===1){
+    head.textContent='Service checklist';
+    const items = ['Check gas pressure before service','Cover the wall and floor','Foam-jet indoor coil and filters','Clean outdoor unit and drain pipe','Test cooling for 10 minutes'];
+    body.innerHTML = items.map((t,i)=>`<div class="check glass" onclick="this.classList.toggle('on')"><i></i>${t}</div>`).join('') + `<button class="btn block" style="margin-top:8px" onclick="jstep=2;renderJob()">Next: photos</button>`;
+  } else if (jstep===2){
+    head.textContent='Before and after';
+    body.innerHTML = `<div class="photos"><div style="background-image:url(https://images.unsplash.com/photo-1562259929-b4e1fd3aef09?auto=format&fit=crop&w=300&q=60)"></div><div onclick="this.style.backgroundImage='url(https://images.unsplash.com/photo-1765518440022-10242cc86895?auto=format&fit=crop&w=300&q=60)';this.textContent=''">+ After photo</div></div>
+      <div class="line glass"><span>Add-on: anti-rust spray<small>Customer approves in her app</small></span><button class="pill lime" onclick="toast('Sent to Ananya for approval · ₹149')">Suggest</button></div>
+      <button class="btn block" style="margin-top:8px" onclick="jstep=3;renderJob()">Complete job</button>`;
+  } else {
+    head.textContent='Job complete';
+    body.innerHTML = `<div class="glass" style="padding:22px;text-align:center"><div class="ring" style="width:110px;height:110px"><svg viewBox="0 0 140 140"><circle cx="70" cy="70" r="60" fill="none" stroke="var(--brand)" stroke-width="8" style="filter:drop-shadow(0 0 10px var(--brand))"/></svg><div class="c"><span style="font-size:40px;color:var(--brand)">✓</span></div></div>
+      <div class="num" style="font-size:44px">+₹480</div><div style="color:var(--tx2);font-size:13px">Added to this week · paid online by customer</div></div>
+      <button class="btn block" style="margin-top:12px" onclick="jstep=0;code='';go('today')">Back to today</button>`;
+  }
+}
+function key(k){ if(k==='⌫') code=code.slice(0,-1); else if(code.length<4) code+=k; renderJob(); if(code.length===4){ if(code==='4827'){ toast('Code matched · job started'); setTimeout(()=>{jstep=1;renderJob()},500);} else { toast('Wrong code · ask again'); code=''; setTimeout(renderJob,400);} } }
+
+/* earnings bars */
+function renderBars(){
+  const d=[['M',1840],['T',2340],['W',2610],['T',1980],['F',2900],['S',3190],['S',0]], m=3200;
+  document.getElementById('bars').innerHTML = d.map(([l,v],i)=>`<div class="${i===1?'':'dim'}"><span class="num" style="font-size:11px">${v?(v/1000).toFixed(1)+'k':''}</span><i style="height:${Math.max(6,v/m*100)}%;animation-delay:${i*60}ms"></i>${l}</div>`).join('');
+}
+
+/* grow tabs */
+let gv='train';
+function renderGrow(){
+  const b = document.getElementById('growBody');
+  if (gv==='train') b.innerHTML = [
+    ['1765518440022-10242cc86895','Gas refill and leak test','Unlocks ₹2,499 jobs',100],
+    ['1562259929-b4e1fd3aef09','Split AC installation','4 videos · quiz',60],
+    ['1667923006173-9e0d2251f608','Customer etiquette refresher','Assigned after a complaint',20]
+  ].map(([img,t,s,p])=>`<div class="mod glass"><div class="ic" style="background-image:url(https://images.unsplash.com/photo-${img}?auto=format&fit=crop&w=120&q=60)"></div><div class="t"><b>${t}</b><small>${s}</small><div class="prog"><i style="width:${p}%"></i></div></div><span class="pill ${p===100?'lime':''}">${p===100?'Done':p+'%'}</span></div>`).join('');
+  if (gv==='kit') b.innerHTML = [
+    ['AC foam-jet chemical · 5 L','₹1,150'],['Coil cleaning brush set','₹420'],['Branded uniform + mask','₹600'],['Drop cloth (wall cover)','₹280']
+  ].map(([t,p])=>`<div class="line glass"><span>${t}<small>Pay from earnings · pick up at Madhapur hub</small></span><button class="pill lime" onclick="toast('Ordered · ${p} deducted from next payout')">${p}</button></div>`).join('');
+  if (gv==='shift') b.innerHTML = `<div class="glass" style="padding:14px;margin-bottom:10px;font-size:13px;color:var(--tx2)"><span class="pill lime">Instant help</span><div style="margin-top:8px">Book shifts in a micro-market. Jobs are auto-assigned during the shift, paid per shift.</div></div>` + [
+    ['Wed 26 Nov','07:00 – 11:00 · Madhapur North','₹520 / shift','Booked'],['Wed 26 Nov','17:00 – 21:00 · Madhapur North','₹580 / shift','Book'],['Thu 27 Nov','07:00 – 11:00 · Kondapur','₹520 / shift','Book']
+  ].map(([d,t,p,s])=>`<div class="shift glass"><div><b>${d}</b><small>${t} · ${p}</small></div><button class="pill ${s==='Booked'?'lime':''}" onclick="this.textContent='Booked';this.classList.add('lime');toast('Shift booked')">${s}</button></div>`).join('');
+}
+document.querySelectorAll('#growSeg button').forEach(x=>x.onclick=()=>{ document.querySelectorAll('#growSeg button').forEach(y=>y.classList.toggle('on',y===x)); gv=x.dataset.v; renderGrow(); });
+
+function go(p){
+  document.querySelectorAll('.page').forEach(s=>s.classList.toggle('on', s.dataset.page===p));
+  document.querySelectorAll('#tabbar button').forEach(b=>b.classList.toggle('on', b.dataset.go===(p==='job'?'today':p)));
+  document.getElementById('scroll').scrollTop = 0;
+  if (p==='job') renderJob();
+  if (p==='earn') renderBars();
+  if (p==='grow') renderGrow();
+}
+document.querySelectorAll('#tabbar button').forEach(b=>b.onclick=()=>go(b.dataset.go));
+</script>
+<script src="brand.js"></script>
+</body>
+</html>
